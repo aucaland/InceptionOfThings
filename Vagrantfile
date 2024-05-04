@@ -20,6 +20,7 @@ Vagrant.configure("2") do |config|
   aucaland.vm.network "private_network", ip: "192.168.56.110"
   aucaland.vm.hostname = "aucalandS"
   aucaland.vm.provision "shell" , privileged: true, path: "./setupVagrantServer.sh"
+  aucaland.vm.synced_folder ".", "/vagrant"
 end
  config.vm.define "aucalandW" do |aucaland|
    aucaland.vm.provider "virtualbox" do |vb|
@@ -32,6 +33,7 @@ end
   aucaland.vm.network "private_network", ip: "192.168.56.111"
   aucaland.vm.hostname = "aucalandW"
   aucaland.vm.provision "shell" , privileged: true, path: "./setupVagrantWorker.sh"
+  aucaland.vm.synced_folder ".", "/vagrant"
 end
 
   # Disable automatic box update checking. If you disable this, then
