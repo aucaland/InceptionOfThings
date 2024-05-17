@@ -13,8 +13,13 @@ echo "deb [arch=amd64 signed-by=/usr/share/keyrings/oracle_vbox_2016.gpg] http:/
 sudo apt update
 sudo apt install virtualbox-7.0 -y
 
+echo "KUBECTL INSTALLING.."
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+
 echo "K3D INSTALLING.."
 curl -s https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash
+
 echo "DOCKER INSTALLING.."
 for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt-get remove $pkg; done
 # Add Docker's official GPG key:
@@ -23,7 +28,6 @@ sudo apt-get install ca-certificates curl
 sudo install -m 0755 -d /etc/apt/keyrings
 sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
 sudo chmod a+r /etc/apt/keyrings/docker.asc
-
 # Add the repository to Apt sources:
 echo \
   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
@@ -36,5 +40,5 @@ echo "VAGRANT INSTALLING.."
 sudo apt install vagrant-libvirt libvirt-daemon-system
 
 echo "ADD HOSTS"
-echo "192.168.56.110	app1.com"
-echo "192.168.56.110	app2.com"
+echo "192.168.56.110	app1.com" >> /etc/hosts
+echo "192.168.56.110	app2.com" >> /etc/hosts
