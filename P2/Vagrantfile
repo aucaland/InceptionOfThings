@@ -7,18 +7,19 @@
 # backwards compatibility). Please don't change it unless you know what
 # you're doing.
 Vagrant.configure("2") do |config|
- config.vm.define "aucalandW" do |aucaland|
+ config.vm.define "aucalandS" do |aucaland|
    aucaland.vm.provider "virtualbox" do |vb|
      # Display the VirtualBox GUI when booting the machine
      vb.cpus = 1 
      # Customize the amount of memory on the VM:
-     vb.memory = "1024"
+     vb.memory = "2048"
+     vb.name = "aucalandS"
    end
   aucaland.vm.box = "debian/bookworm64"
-  aucaland.vm.network "private_network", ip: "192.168.56.111"
-  aucaland.vm.hostname = "aucalandW"
-  aucaland.vm.provision "shell" , privileged: true, path: "./setupVagrantWorker.sh"
-  aucaland.vm.synced_folder ".", "/vagrant"
+  aucaland.vm.network "private_network", ip: "192.168.56.110"
+  aucaland.vm.hostname = "aucalandS"
+  aucaland.vm.provision "shell" , privileged: true, path: "./scripts/setup.sh"
+  aucaland.vm.synced_folder "./confs", "/vagrant"
 end
 
   # Disable automatic box update checking. If you disable this, then
