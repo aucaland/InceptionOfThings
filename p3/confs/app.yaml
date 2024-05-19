@@ -9,3 +9,12 @@ spec:
     repoURL: https://github.com/aucaland/InceptionOfThings.git
     targetRevision: HEAD
     path: p3/confs/dev
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: dev
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+  automated:
+    selfHeal: true
+    prune: true
