@@ -31,7 +31,7 @@ echo "${BLUE}Initial ArgoCD secret:${RESET}"
 sudo kubectl get secret argocd-initial-admin-secret -n argocd -o jsonpath="{.data.password}" | base64 --decode
 echo
 
-echo "${BLUE}Applying ArogCD Application.."
+echo "${BLUE}Applying ArgoCD Application.."
 sudo kubectl apply -f /home/aucaland/Documents/IOT/p3/confs/app.yaml
 echo "${BLUE}Listening for argoCD..${RESET}"
 sudo kubectl port-forward -n argocd svc/argocd-server 8080:443 &
